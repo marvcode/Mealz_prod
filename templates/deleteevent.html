@@ -1,0 +1,116 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+<div class="jumbotron">
+  <h1>Family Gathering Planner</h1>
+</div>
+
+<div class="panel panel-warning">       
+     <!-- Default panel contents -->
+     <div class="panel-heading"><h3><Center>Are you sure you want to DELETE this Event??</Center></h3> 
+        <h2><Center>Warning: Deleting this event can not be undone.</Center></h2>
+	 <!--Handle MESSAGE FLASHING -->
+			{% with messages = get_flashed_messages() %}
+			  {% if messages %}
+			  <ul>
+				 {% for message in messages %}
+				   <li><strong>{{message}}</strong></li>
+				 {% endfor %}
+			  </ul>
+			  {% endif %}
+			{% endwith %}
+
+       <h3>Event Name:</h3> {{webevent_name}}
+          
+       <h3>Event Notes:</h3> {{webevent_notes}} 
+       <h3>Event Organizer:</h3> {{webevent_org_fname}} {{webevent_org_lname}} </br>
+       <h3>Event Location:</h3> {{webevent_location}}  @
+        {{webevent_address}} , {{webevent_city}}, {{webevent_state}}  {{webevent_zip}} </br>
+        {{webevent_date}} starting at: {{webevent_time}}
+        
+        </br>
+        
+        </br>
+
+
+    </div>  
+         <div class="panel-body">
+            <!-- Outer Table for Categories-->
+            <table class="table">
+               <tr><B>
+                  <th>Category:</th>
+                  <th>Qty Requested:</th>
+                  <th>Note:</th>                
+               </B></tr>
+              {%for item in webrequested %}
+               <tr>
+                  <td>{{item.category}}</td>
+                  <td>{{item.qty_rqst}}</td>                  
+                  <td> {{item.rqst_note}}  </td>
+                  <td> <table class="table"> <!-- Inner Table for Comitted items-->
+                        <tr>                      
+                          <th>  Committed Item:  </th>
+                          <th>  QTY:  </th>
+                          <th>  Name:  </th>
+                          <th>  Note:  </th>
+                        </tr>
+                       {% set count = [0] %}
+                       {% if webcommitted|length() <1 %}
+                          Hey! More items needed here!
+                       {% else %}
+                          {% for thing in webcommitted %}
+                             {% if thing.category == item.category %}
+                                <tr>
+                                  <td>{{thing.item_name}}</td>
+                                  <td>{{thing.usr_qty}}</td>
+                                  <td>{{thing.usr_fname}}</td>
+                                  <td>{{thing.usr_note}}</td>
+                                </tr>
+                                {# Count the number of committed 'things' #}
+                                {#      in this Category                  #}
+                                {% if count.append(count.pop() + 1) %}
+                                {% endif %}
+                             {% endif %}
+                             {# Wait for last loop to check for Qty Committed #}
+                             {% if loop.last %}
+                                {% if (count[0] < item.qty_rqst|int) %}
+                                   Hey! More items needed here!
+                                {% endif %}
+                             {% endif %}
+                          {% endfor %}
+                       {% endif %}
+
+                       </table>
+                  </td>
+             </tr>
+             {% endfor %}
+             </table>
+             
+             <!-- Form at bottom of page for Deleting this event -->
+             <form action="{{ url_for('delete', org_id=webevent_org_id, event_id=webevent_id) }}" method = 'POST'>
+                {{ webform.csrf_token }}
+			    <h3>Do you wish to continue to delete this event? </h3>
+			    <!--Handle MESSAGE FLASHING -->
+                 {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                 <ul>
+                   {% for message in messages %}
+                     <li><strong>{{message}}</strong></li>
+                   {% endfor %}
+                </ul>
+               {% endif %}
+               {% endwith %}
+            <U>Confirm:</U>
+             <h2>{{webform.confirm}}  {{webform.confirm.label}}  {{ webform.confirm.errors[0] }}</h2>
+               <input type='submit' value="DELETE THIS EVENT"> 
+               <a href='{{ url_for('showPublic') }}' ><h3>Cancel</h3></a> </br>
+               </br>
+               </br>
+             </form>
+            
+         </div>   
+</div>
+
+
+{% endblock %}

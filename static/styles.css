@@ -1,0 +1,43 @@
+/*
+	Styles for the Footer:
+*/
+.mealz-footer {
+	background-color: #9e9e9e;
+}
+
+.mealz-footer a {
+	color: white;
+}
+
+/*
+	Styles for the Logged In Page:
+*/
+
+.content-row {
+	margin: 100px 0px;
+}
+
+.content-text {
+	padding: 5px 75px;
+}
+
+.content-text h4 {
+	line-height: 1.5;
+}
+
+
+/*
+	Styles for the Search and Contribute Page:
+*/
+
+
+.search-form input {
+	color: #000;
+}
+
+
+
+
+.navbar {
+	height: 125px
+}

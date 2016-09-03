@@ -1,0 +1,24 @@
+<div class="container-fluid mealz-footer">
+	<div class="col-lg-2 col-lg-offset-1">
+		<h4>Explore</h4>
+                <h5><a href="{{url_for('showPublic')}}">Home</a></h5>
+		<h5><a href="{{url_for('search')}}">Search/Contribute to Event</a></h5>
+                {% if webuserid %}
+                  <h5><a href="{{url_for('create_event', user_id=webuserid)}}">Create an Event</a></h5>
+                  <h5><a href="{{url_for('list_my_events', user_id=webuserid)}}">Show my Events</a></h5>
+                {% endif %}
+        </div>
+	<div class="col-lg-2 col-lg-offset-1">
+		<h4>Account</h4>
+                {% if user.email is defined %}
+                  <li><span class="glyphicon glyphicon-user" aria-hidden="false"></span>
+                  Logged in as : {{ user.email }}</li>
+             
+                  <h5><a href="{{url_for('logout')}}">Logout</a></h5>
+                {% else %}
+		  <h5><a href="{{url_for('stormpath.login')}}">Login</a></h5>
+   	          <h5><a href="{{url_for('stormpath.register')}}">Register</a></h5>
+                {% endif %}
+	</div>
+	<div class="col-lg-12 text-center"><h4>&copy; 2016 Mealz</h4></div>
+</div>    

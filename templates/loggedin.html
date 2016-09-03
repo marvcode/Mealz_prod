@@ -1,0 +1,39 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+
+
+
+
+<div class="jumbotron text-center">
+  <h1>Mealz</h1><h2> A Gathering Planner</h2>
+  <p>Let us help you plan your next big event!  Family gatherings, PotLuck Dinners, etc.</p>
+  <p><a class="btn btn-primary btn-lg" href="{{url_for('create_event', user_id=webuserid) }}" role="button">Create an Event</a>
+  <a class="btn btn-primary btn-lg" href="{{url_for('list_my_events', user_id=webuserid)}}" role="button">Show My Events</a>
+  <a class="btn btn-primary btn-lg" href="{{url_for('search')}}"" role="button">Search / Contribute to an Event</a></p>  
+  </div>
+</div>
+  <!--<div class="col-lg-6">
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  		<div class="carousel-inner" role="listbox">
+    		<div class="item active">
+      			<img src="{{ url_for('static', filename='fammeal1.jpg') }}" alt="...">
+    		</div>
+    		<div class="item">
+      			<img src="{{ url_for('static', filename='fammeal2.jpg') }}" alt="...">
+    		</div>
+  		</div>
+	</div>
+  </div>-->
+		
+<div class="container">
+	<h1>Welcome, {{webfname}}!</h1>
+	<h2>Make some great family gatherings!!! Woohoo!!</h2>
+</div>
+
+{% include "intro.html" %}
+
+{% include "footer.html" %}
+         
+{% endblock %}

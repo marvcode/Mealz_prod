@@ -1,0 +1,52 @@
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{url_for('showPublic')}}">
+      	<img class="img" alt="Brand" src="{{url_for('static',filename='Mealz_logo.png') }}" style="height:84px">
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active">
+        	<a href="{{url_for('showPublic')}}">
+				<span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
+		</li>
+        
+        {% if webuserid  %}
+             <li><a href="{{url_for('search')}}">Search/Contribute to Event</a></li>
+             <li><a href="{{url_for('create_event', user_id=webuserid) }}">Create an Event</a></li>
+             <li><a href="{{url_for('list_my_events', user_id=webuserid) }}">Show my Events</a></li>
+        {% endif %}
+        
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          {% if user.email is defined %}
+             <li><span class="glyphicon glyphicon-user" aria-hidden="false"></span>
+             Logged in as : {{ user.email }}</li>
+             
+             <form method="get" action="http://www.marvsprojectsite.net/apps/Mealz/logout">
+                <button type='submit' name='logout' value='Logout'><B>Logout</B></button>
+             </form>
+
+          {% else %}
+	     <li><a href="http://www.marvsprojectsite.net/apps/Mealz/login">
+	     <p><B>Login</B> to Existing Account </p></a></li>
+   	     <li><a href="http://www.marvsprojectsite.net/apps/Mealz/register">
+	     <p><B>Register</B> for Account </p></a></li>
+    	  {% endif %}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+

@@ -1,0 +1,202 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+<div class="jumbotron text-center">
+  <h1>Mealz</h1><h2> A Gathering Planner</h2>
+  <p>Let us help you plan your next big event!  Family gatherings, PotLuck Dinners, etc.</p>
+</div>
+
+<div class="container">
+<h1>Create New Event</h1>
+<h3>Organizer: {{webuser_fname}}  {{ webuser_lname }}</h3>
+
+         <!-- Form at bottom of page for contributing to this event -->
+         <form action="{{ url_for('create_event', user_id=webevent_org_id) }}" method = 'POST'>
+         {{ webform.csrf_token }}
+
+<!-- EVENT INFO -->
+    	
+    	<div class="panel panel-primary">
+		  <div class="panel-heading">
+			<h3 class="panel-title">Event Information:</h3>
+		  </div>
+		  <div class="panel-body">
+			<p>{{webform.evt_num.label}} {{webform.evt_num(size=5)}} {{webform.evt_num.errors[0]}}
+			 {{webform.evt_name.label}} {{webform.evt_name(size=50, height=80, placeholder=webform.evt_name.description)}} {{webform.evt_name.errors[0]}}
+			 <p>{{webform.evt_location.label}} {{webform.evt_location(size=60, height=80, placeholder=webform.evt_location.description)}} {{webform.evt_location.errors[0]}}</p>
+			 <p>{{webform.evt_address.label}} {{webform.evt_address(size=50, height=80, placeholder=webform.evt_address.description)}} {{webform.evt_address.errors[0]}}
+			 <!--Trivia:Longest city name in US is 22 Char 'Rancho Santa Margarita, California' -->
+			 {{webform.evt_city.label}} {{webform.evt_city(size=25, height=80, placeholder=webform.evt_city.description)}} {{webform.evt_city.errors[0]}}
+			 {{webform.evt_state.label}} {{webform.evt_state(size=3, height=80, placeholder=webform.evt_state.description)}} {{webform.evt_state.errors[0]}}
+			 {{webform.evt_zip.label}} {{webform.evt_zip(size=9, height=80, placeholder=webform.evt_zip.description)}} {{webform.evt_zip.errors[0]}}</p>
+		 
+			 <p>{{webform.evt_notes.label}}</p>
+			 {{webform.evt_notes(size=125, height=80, placeholder=webform.evt_notes.description)}} {{webform.evt_notes.errors[0]}}
+		  </div>
+		</div>
+         
+         <!-- EVENT INFO -->
+         
+                  <!-- EVENT DATE -->
+         
+         <div class="panel panel-primary">
+		  <div class="panel-heading">
+			<h3 class="panel-title">Enter Event Date & Time</h3>
+		  </div>
+		  <div class="panel-body">
+			<div class="formpadding">
+				Date:
+				 {{webform.evt_month}} {{ webform.evt_month.errors[0] }}
+				 {{webform.evt_day}} {{ webform.evt_day.errors[0] }}
+				 {{webform.evt_year}} {{ webform.evt_year.errors[0] }}
+				Time:
+				 {{webform.evt_hour}} {{ webform.evt_hour.errors[0] }}
+				 {{webform.evt_minute}} {{ webform.evt_minute.errors[0] }}
+				 {{webform.evt_tz}} {{ webform.evt_tz.errors[0] }}			 
+			</div>
+		  </div>
+		</div>
+			 
+			 <!-- EVENT DATE -->
+			 
+			 			 <!-- EVENT CAT -->
+			 
+			 <div class="panel panel-primary">
+			  <div class="panel-heading">
+				<h3 class="panel-title">Event Meal Categories:</h3>
+			  </div>
+			  <div class="panel-body">
+<h5><I>Note: A quantity must be included for your categories to appear on the sign up sheet.
+			For example, if you need 2 people to bring 100 napkins each, # Needed should be 2,
+			and the Note should read "Please bring 100 napkins".</br></br>
+			Likewise, if you dont want any items from a particular category, please make sure quantity is set to 0.
+			</br></br>
+			Suggestion: If you are inviting mostly families for your meal, be sure to ask everyone to sign up for 2-3 items. 
+			</h5></I>
+			</br>
+            <!-- Category Table -->
+            <table class="table">
+              <h3><tr>
+                  <th>Category:</th>
+                  <th>Quantity:</th>
+                  <th>Notes:</th>
+               </h3>
+               </tr>
+               </h3>
+               <tr>
+                  <td> <h4>Appetizers / Salads  </h4>
+                  </td>
+                  <td>
+                  {{webform.req_app_qty(size=5)}} {{ webform.req_app_qty.errors[0] }}
+                  </td>
+                  <td>
+                  {{webform.req_app_note(size=80, placeholder=webform.req_app_note.description)}} {{ webform.req_app_note.errors[0] }}
+                  </td>
+               </tr>
+               <tr>
+                  <td> <h4>Main Dish</h4>
+                  </td>
+                  <td>
+                  {{webform.req_main_qty(size=5)}} {{ webform.req_main_qty.errors[0] }}
+                  </td>
+                  <td>
+                  {{webform.req_main_note(size=80, placeholder=webform.req_main_note.description)}} {{ webform.req_main_note.errors[0] }}
+                  </td>
+               </tr>
+               <tr>
+                  <td> <h4>Side Dish</h4>
+                  </td>
+                  <td>
+                  {{webform.req_side_qty(size=5)}} {{ webform.req_side_qty.errors[0] }}
+                  </td>
+                  <td>
+                  {{webform.req_side_note(size=80, placeholder=webform.req_side_note.description)}} {{ webform.req_side_note.errors[0] }}
+                  </td>
+               </tr>
+               <tr>
+                  <td> <h4>Bread</h4>
+                  </td>
+                  <td>
+                  {{webform.req_bread_qty(size=5)}} {{ webform.req_bread_qty.errors[0] }}
+                  </td>
+                  <td>
+                  {{webform.req_bread_note(size=80, placeholder=webform.req_bread_note.description)}} {{ webform.req_bread_note.errors[0] }}
+                  </td>
+               </tr>
+               <tr>
+                  <td> <h4>Desserts</h4>
+                  </td>
+                  <td>
+                  {{webform.req_dessert_qty(size=5)}} {{ webform.req_dessert_qty.errors[0] }}
+                  </td>
+                  <td>
+                  {{webform.req_dessert_note(size=80, placeholder=webform.req_dessert_note.description)}} {{ webform.req_dessert_note.errors[0] }}
+                  </td>
+               </tr>
+               <tr>
+                  <td> <h4>Beverages</h4>
+                  </td>
+                  <td>
+                  {{webform.req_bev_qty(size=5)}} {{ webform.req_bev_qty.errors[0] }}
+                  </td>
+                  <td>
+                  {{webform.req_bev_note(size=80, placeholder=webform.req_bev_note.description)}} {{ webform.req_bev_note.errors[0] }}
+                  </td>
+               </tr>
+               <tr>
+                  <td> <h4>Utensils</h4>
+                  </td>
+                  <td>
+                  {{webform.req_uten_qty(size=5)}} {{ webform.req_uten_qty.errors[0] }}
+                  </td>
+                  <td>
+                  {{webform.req_uten_note(size=80, placeholder=webform.req_uten_note.description)}} {{ webform.req_uten_note.errors[0] }}
+                  </td>
+               </tr>
+               <tr>
+                  <td> <h4>Cups, Plates, Napkins</h4>
+                  </td>
+                  <td>
+                  {{webform.req_cups_qty(size=5)}} {{ webform.req_cups_qty.errors[0] }}
+                  </td>
+                  <td>
+                  {{webform.req_cups_note(size=80, placeholder=webform.req_cups_note.description)}} {{ webform.req_cups_note.errors[0] }}
+                  </td>
+               </tr>
+               <tr>
+                  <td> <h4>Miscellaneous</h4>
+                  </td>
+                  <td>
+                  {{webform.req_misc_qty(size=5)}} {{ webform.req_misc_qty.errors[0] }}
+                  </td>
+                  <td>
+                  {{webform.req_misc_note(size=80, placeholder=webform.req_misc_note.description)}} {{ webform.req_misc_note.errors[0] }}
+                  </td>
+               </tr>
+               </table>
+           </div>       
+			  </div>
+           
+           <!-- EVENT CAT -->
+           
+       <!-- Oraganizer: {{webuser_fname}}  {{ webuser_lname }}  :  {{ webuser_email }} -->
+			 
+
+           <div class="formpadding">        	       
+        	<input class="btn btn-primary" type='submit' value='Submit Meal Details'>
+            <a class="btn btn-danger" href='{{ url_for('showPublic') }}' >Cancel</a>
+           </div>
+	   </div>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			
+			</div>
+			
+{% include "footer.html" %}
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+<div class="jumbotron text-center">
+  <h1>Mealz</h1><h2> A Gathering Planner</h2>
+  <p>Let us help you plan your next big event!  Family gatherings, PotLuck Dinners, etc.</p>
+</div>
+
+<div class="container">
+<h1>My Events</h1>
+	<div class="panel panel-primary">       
+		<!-- Default panel contents -->
+		<div class="panel-heading">
+			<h3>{{webfname}}  {{weblname}}'s Events</h3>
+			<h4>(When sending Invitations, guests will need your last name and the Event ID below.)</h4>
+		</div>  
+		<!--Handle MESSAGE FLASHING -->
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<ul>
+			{% for message in messages %}
+			<li><strong>{{message}}</strong></li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		{% endwith %}
+
+		<div class="panel-body">
+			<!-- Table -->
+			<table class="table">
+				<tr class="active"><B>
+					<th><h4>Event Date:</h4></th>
+					<th><h4>Event ID:</h4></th>
+					<th><h4>Event Name:</h4></th>
+					<th><h4>Responses:</h4></th>                   
+				</B></tr>
+				{%for evt in webevents %}
+				<tr>
+					<td> <h3>{{evt.evt_date}} </h3></td>
+					<td> <h3>{{evt.id}}</h3></td>
+					<td> <h3>{{evt.evt_name}} 
+					<a href="{{ url_for('contribute', org_id=evt.org_id,
+							  event_id=evt.id) }}"><span class="btn btn-primary btn-sm">Open</span></a>
+					<a href="{{ url_for('edit_event', user_id = evt.org_id, evt_id= evt.id) }}"><span class="btn btn-warning btn-sm">Edit</span></a>
+					<a href="{{ url_for('delete', org_id=evt.org_id,
+							  event_id=evt.id) }}"><span class="btn btn-danger btn-sm">Delete</span></a></td>
+					<td> <h3>{{webrespdict[evt.id]}} </h3> </td>
+				{% endfor %}
+			</table>
+			<a class="btn btn-primary" href="{{ url_for('create_event', user_id=webuserid) }}">Create new Event   </a>
+			<a class="btn btn-danger" href='{{ url_for('showPublic') }}' >Cancel</a>
+		</div>   
+	</div>
+</div>
+</div>
+</br>
+</br>
+
+{% include "footer.html" %}
+
+{% endblock %}

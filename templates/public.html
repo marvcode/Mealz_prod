@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+
+<div class="jumbotron text-center">
+  <h1>Mealz</h1><h2> A Gathering Planner</h2>
+  <p>Let us help you plan your next big event!  Family gatherings, PotLuck Dinners, etc.</p>
+  <p><a class="btn btn-primary btn-lg" href="{{url_for('stormpath.login')}}" role="button">Login or Create An Account</a></p>  
+  </div>
+</div>
+{% include "intro.html" %}
+
+{% include "footer.html" %}
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+
+<div class="jumbotron text-center">
+  <h1>Mealz</h1><h2> A Gathering Planner</h2>
+  <p>Let us help you plan your next big event!  Family gatherings, PotLuck Dinners, etc.</p>
+</div>
+<div class="container">
+	<h1>Find an Event</h1> 
+  <div class="panel panel-primary">       
+       <!-- Default panel contents -->
+       <div class="panel-heading">
+          <h2>You will need the Event Organizer's last name and the Event ID.</h2>
+          </br>
+ 
+         <!--Handle MESSAGE FLASHING -->
+         {% with messages = get_flashed_messages() %}
+             {% if messages %}
+               <ul>
+                  {% for message in messages %}
+                     <li><strong>{{message}}</strong></li>
+                  {% endfor %}
+               </ul>
+             {% endif %}
+         {% endwith %}
+ 
+         <form class="search-form" action="{{ url_for('search') }}" method = 'POST'>
+            {{ webform.csrf_token }}
+            <h3>Event Organizer's Last Name:</h3>
+            {{ webform.org_lname }} {{ webform.org_lname.errors[0] }}
+            <h3>Event ID:</h3>
+            {{ webform.evt_id }} {{ webform.evt_id.errors[0] }}
+            </br>
+            </br>
+            <input class="btn btn-default" type='submit' value='Search & Contribute'>
+            <a class="btn btn-danger" href='{{ url_for('showPublic') }}' >Cancel</a>
+            <!--<a href='{{ url_for('showPublic') }}' >  Cancel</a> -->
+         </form>
+         </br>
+       </div>  
+  </div>
+</div>
+</div>
+</br>
+</br>
+</br>
+</br>
+</br>
+
+
+{% include "footer.html" %}
+
+{% endblock %}
+
+<!-- <input type="text" size="25" name="posted_lname"></br> -->
+
+<!-- <input type="text" size="25" name="posted_evt_id"></br> -->
