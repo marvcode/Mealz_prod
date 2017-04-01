@@ -1,14 +1,12 @@
-<center> Project: Item Catalog </center>
-==
-<center> Application Name: Mealz </center>
-==
---
+# Project: Item Catalog #
+
+## Application Name: Mealz  ##
 
 For my <B>Item Catalog</B> project, I chose to create a meal planning application for family gatherings and potluck dinners.
 
 <B>EXPLANATION:</B>  This project was used for as a project for my Udacity Full Stack Web Developer Nano-degree. Essentially, this is just a learning project that uses python code to interact with the Postgres database.
 
-####What is Mealz??####
+### What is Mealz?? ###
 Mealz is _potluck_ or _family gathering_ planner that will help you organize your next event.
 
 Mealz is web app that allows an event organizer to:
@@ -25,10 +23,10 @@ Features:
 + json API  
 
 
-# Quick Start (How to run the application):#
+# Quick Start (How to run the application): #
 First things First... To run the python application several prerequisites will be required :
 
-###Prerequisites:###
+### Prerequisites: ###
 
 >1. Install Frameworks and libraries
 2. Create a Mealz Configuration File
@@ -37,7 +35,7 @@ First things First... To run the python application several prerequisites will b
 5. Create a Google Developer Account
 
 
-###Install these libraries on your computer:#
+### Install these libraries on your computer: #
 
     sudo pip install webob
     sudo pip install flask_wtf
@@ -48,7 +46,7 @@ First things First... To run the python application several prerequisites will b
     sudo pip install psycopg2  
 
   
-###Mealz Configuration File:#
+### Mealz Configuration File: #
 A key element of this app is managing all the configuration parameters.  I utilized a library called ConfigParser.  <https://docs.python.org/2/library/configparser.html>
 
 I used ConfigParser to create a configuration file called
@@ -60,7 +58,7 @@ Many critical application parameters are configured within this configuration fi
 To help with managing these configurations, I also included a small python app for you to create your own config file. This app is called: meals_ ini_ set.py
 
 ___
-###Database Information:##
+### Database Information: ##
 
 This application utilizes SQLAlchemy ORM to persist all data in an SQL database. It is assumed that you have access to a computer running postgreSQL v9.4 or later. Whether connecting to this computer locally or remotely, you will need to connect to postgres as a superuser (such as 'postgres') and create a database called 'Meals'.
     
@@ -77,7 +75,7 @@ Once the database is created, the following file with provision the database as 
 
 
 ___
-###Stormpath Account:###
+### Stormpath Account: ###
 
 I decided to use Strompath for my User Authentication & Authorization.  This places user account info in Stormpath's secure servers and not on mine.  
 
@@ -93,7 +91,7 @@ If that doesn’t work, try this instead:
 
 You may need to run the above commands with sudo depending on your Python setup.
 
-*Get an API Key*  
+* Get an API Key*  
 
 All requests to Stormpath must be authenticated with an API Key.
 
@@ -134,20 +132,20 @@ In addition to user registration and login, Stormpath can do a lot more!
 
 
 ___
-###Google Developer Account:###
+### Google Developer Account: ###
 
 For more details on using Stormpath to integrate and offer Social Login see:  
           http://flask-stormpath.readthedocs.io/en/latest/product.html#use-google-login  
 
 
-**Create a Google Project**
+** Create a Google Project **
 
 The first thing you need to do is log into the Google Developer Console and create a new Google Project.
 
 You can do this by visiting the Developer Console and clicking the “Create Project” button. 
 Go ahead and pick a “Project Name” (usually the name of your app), and (optionally) a “Project ID”.
 
-**Enable Google Login**
+** Enable Google Login **
 
 Now that you’ve got a Google Project, enable Google Login. The way Google Projects work is that you have to selectively enable what functionality each Project needs.
 
@@ -155,7 +153,7 @@ From your Google API Console Dashboard click on your new Project, then in the si
 
 Now, scroll through the API list until you see “Google+ API”, then click the “OFF” button next to it to enable it. 
 
-**Create OAuth Credentials** 
+** Create OAuth Credentials ** 
 
 Next create a new OAuth client ID. This is what we’ll use to handle user login with Google.
 
@@ -172,14 +170,14 @@ You’ll want to do several things here:
 
 Important: Take note of your “Client ID” and “Client Secret” variables provided by Google.
 
-**Configure Your Flask App**
+** Configure Your Flask App **
 
 Now that we’ve created a new Google Project and generated OAuth secrets – we can now enter these secrets into our Flask app so that Flask-Stormpath knows about them.  I used a config.ini file for all my configuration settings.  So you will need to edit your copy of meals_ ini_ set.py.
 
 
 
 ___
-### Finally running the python application:
+### Finally running the python application: ###
 
 1. On a Mac, open a terminal window and create a directory on your computer that you want to run Meals from and clone this repository.  
 
@@ -196,9 +194,9 @@ ___
 
 
 ___
-#Documentation
+# Documentation #
 
-###Route Definitions in mf_meals.py
+### Route Definitions in mf_meals.py ###
 
 >showPublic():  
 3 options on this page  
@@ -251,7 +249,7 @@ This route defines a REST API for getting details about an event
 
 
 
-### JSON API###
+### JSON API ###
 
 www.example.com/json/<int:event_id>/
 This route defines a REST API for getting details about an event.
@@ -260,7 +258,7 @@ A HTTP request to this URI will respond with the details of an event in the data
 
 Note: The event must exist so that the integer value of the event_id must be valid or an 'invalid response' will be returned.
 
-***Example for getting details about event Id 1:***  
+*** Example for getting details about event Id 1:***  
 
 HTTP Request to:  
 
@@ -334,7 +332,7 @@ returns this response:
 
 
 
-#Project Grading Rubric Status:
+# Project Grading Rubric Status:
 
 Requirements | Comments
 -------------|----------
