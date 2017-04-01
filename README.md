@@ -28,7 +28,7 @@ First things First... To run the python application several prerequisites will b
 
 ### Prerequisites: ###
 
->1. Install Frameworks and libraries
+1. Install Frameworks and libraries
 2. Create a Mealz Configuration File
 3. Create an SQL Database (I usedPostgres 9.4)
 4. Create a Stormpath Account
@@ -58,7 +58,7 @@ Many critical application parameters are configured within this configuration fi
 To help with managing these configurations, I also included a small python app for you to create your own config file. This app is called: meals_ ini_ set.py
 
 ___
-### Database Information: ##
+### Database Information: ###
 
 This application utilizes SQLAlchemy ORM to persist all data in an SQL database. It is assumed that you have access to a computer running postgreSQL v9.4 or later. Whether connecting to this computer locally or remotely, you will need to connect to postgres as a superuser (such as 'postgres') and create a database called 'Meals'.
     
@@ -91,7 +91,7 @@ If that doesn’t work, try this instead:
 
 You may need to run the above commands with sudo depending on your Python setup.
 
-* Get an API Key*  
+  * Get an API Key   
 
 All requests to Stormpath must be authenticated with an API Key.
 
@@ -138,14 +138,14 @@ For more details on using Stormpath to integrate and offer Social Login see:
           http://flask-stormpath.readthedocs.io/en/latest/product.html#use-google-login  
 
 
-** Create a Google Project **
+  * Create a Google Project  
 
 The first thing you need to do is log into the Google Developer Console and create a new Google Project.
 
 You can do this by visiting the Developer Console and clicking the “Create Project” button. 
 Go ahead and pick a “Project Name” (usually the name of your app), and (optionally) a “Project ID”.
 
-** Enable Google Login **
+  * Enable Google Login 
 
 Now that you’ve got a Google Project, enable Google Login. The way Google Projects work is that you have to selectively enable what functionality each Project needs.
 
@@ -153,7 +153,7 @@ From your Google API Console Dashboard click on your new Project, then in the si
 
 Now, scroll through the API list until you see “Google+ API”, then click the “OFF” button next to it to enable it. 
 
-** Create OAuth Credentials ** 
+  * Create OAuth Credentials  
 
 Next create a new OAuth client ID. This is what we’ll use to handle user login with Google.
 
@@ -170,13 +170,12 @@ You’ll want to do several things here:
 
 Important: Take note of your “Client ID” and “Client Secret” variables provided by Google.
 
-** Configure Your Flask App **
+  * Configure Your Flask App 
 
 Now that we’ve created a new Google Project and generated OAuth secrets – we can now enter these secrets into our Flask app so that Flask-Stormpath knows about them.  I used a config.ini file for all my configuration settings.  So you will need to edit your copy of meals_ ini_ set.py.
 
 
 
-___
 ### Finally running the python application: ###
 
 1. On a Mac, open a terminal window and create a directory on your computer that you want to run Meals from and clone this repository.  
@@ -197,7 +196,7 @@ ___
 # Documentation #
 
 ### Route Definitions in mf_meals.py ###
-
+  
 >showPublic():  
 3 options on this page  
 1. Create a new event  
@@ -205,12 +204,12 @@ ___
 3. Search for an event (that user has been invited to)  
 also, this routes checks user for authenticated and if so redirect to '/public/loggedin'
 >>
-
+  
 >create__event(user_id):  
 User is able to create a new event & add details about event  
 Gather important details on user from Stormpath
 >>
-
+  
 >list_ my_ events(user_id):  
 This page should list all of this user's events  
 Option : Open or contribute to any of the events  
@@ -219,12 +218,12 @@ Option: Create a new event... redirects to '/createevent'
 Option: Delete one of their own events... redirects to '/deleteevent'  
 Gather important details on user from Stormpath  
 >>
-    
+      
 >edit__event(user_id, evt_id):  
 User has the ability to edit an event that they created.  
 Gather important details on user from Stormpath  
 >>
-
+  
 >search():  
 User has the ability to search for an event based on Originator last name and event ID.  
 Gather details about searching user  
@@ -234,7 +233,7 @@ Gather details about searching user
 User has the ability to contribute to an event  
 Gather details about contributing user   
 >>
-
+  
 >delete(org_ id, event_ id):
 Organizer has ability to delete one of their events
 Gather details about contributing user   
@@ -252,13 +251,14 @@ This route defines a REST API for getting details about an event
 ### JSON API ###
 
 www.example.com/json/<int:event_id>/
+  
 This route defines a REST API for getting details about an event.
 
 A HTTP request to this URI will respond with the details of an event in the database.  The details within the response will include the Event Details, the requested Items, and the committed items from guests.
 
 Note: The event must exist so that the integer value of the event_id must be valid or an 'invalid response' will be returned.
 
-*** Example for getting details about event Id 1:***  
+*** Example for getting details about event Id 1: ***  
 
 HTTP Request to:  
 
